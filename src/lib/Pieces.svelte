@@ -49,12 +49,14 @@
   {#each color_pieces as color}
     <div class={color.color}>
       {#each Object.keys(color.pieces) as piece_type}
+      <div class={piece_type}>
         <img src={img_srcs[piece_type]} alt="yo" />
         <ul>
             {#each color.pieces[piece_type] as square}
                 <li>{square}</li>
             {/each}
         </ul>
+        </div>
       {/each}
     </div>
   {/each}
@@ -62,7 +64,26 @@
 
 <style>
   img {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  li {
+    list-style-type: none;
+    text-align: center;
+}
+
+  #pieces {
+    display: flex;
+    justify-content: center;
+  }
+
+  #pieces > div {
+    display: flex;
+    justify-content: center;
   }
 </style>
