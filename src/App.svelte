@@ -1,5 +1,7 @@
 <script>
+  import Infos from "./lib/Infos.svelte";
   import Pieces from "./lib/Pieces.svelte";
+  import Inputs from "./lib/Inputs.svelte";
   import Board from "./lib/Board.svelte";
 
   const get_puzzle = async () => {
@@ -15,14 +17,16 @@
   };
 
   let promise = get_puzzle();
- 
+
 </script>
 
 {#await promise}
   ...
 {:then puzzle}
   <div>
+    <Infos {puzzle} />
     <Pieces pieces={puzzle.pieces} />
-    <Board puzzle={puzzle} />
+    <Inputs {puzzle} />
+    <Board {puzzle} />
   </div>
 {/await}
