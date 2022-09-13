@@ -1,38 +1,48 @@
 <script>
   export let puzzle;
-  const keys_name = [
-    ["B", "K", "N", "Q", "R"],
-    ["a", "b", "c", "d", "e", "f", "g", "h"],
-    ["1", "2", "3", "4", "5", "6", "7", "8"],
-    ["x", "+", "=", "#", "del"],
-  ];
-  let moves = [puzzle.san_moves[0]];
+  export let guessing;
+
+  const trait = puzzle.fens[1].split(" ")[1];
   let index = 1;
+  $: move = puzzle.san_moves[index];
+  $: moves = puzzle.san_moves.slice(0, index);
   let current = "";
 
-  $: checkKey = (key) => {
-    for (let i = 0; i < puzzle.legal_san_moves[index].length; i++) {
-      if (puzzle.legal_san_moves[index][i].startsWith(current)) {
-        if (puzzle.legal_san_moves[index][i][current.length] === key) {
-          return false;
+  let buttons = [];
+  $: {
+    buttons = [];
+    if (index < puzzle.legal_san_moves.length) {
+      puzzle.legal_san_moves[index].forEach((move) => {
+        if (
+          move.startsWith(current) &&
+          !buttons.includes(move[current.length])
+        ) {
+          buttons = [...buttons, move[current.length]];
         }
-      }
+      });
+      buttons = buttons.sort();
     }
-    return key !== "del";
+  }
+
+  const getPrefix = (i) => {
+    let prefix =
+      trait === "w"
+        ? String(Math.floor(i / 2) + 1)
+        : String(Math.ceil(i / 2) + 1);
+    prefix += (i + Number(trait === "b")) % 2 ? "..." : ".";
+    return prefix;
   };
 
-  const handleClick = (key) => {
+  const handleClick = (letter) => {
     return () => {
-      if (key === "del") {
-        current = "";
-      } else if (key === puzzle.san_moves[index][current.length]) {
-        current += key;
-        if (current === puzzle.san_moves[index]) {
+      if (letter === move[current.length]) {
+        current += letter;
+        if (current === move) {
           index += 2;
-          moves = moves.concat(current);
-          moves = moves.concat(puzzle.san_moves[index - 1]);
-          console.log(moves);
           current = "";
+          if (index > puzzle.san_moves.length - 1) {
+            guessing = false;
+          }
         }
       }
     };
@@ -40,23 +50,15 @@
 </script>
 
 <div>
-  <div id="moves">
-    {#each moves as move, i}
-      <p>{i + 1}. {move}</p>
-    {/each}
-  </div>
+  {#each moves as move, i}
+    <div>
+      {getPrefix(i)}{move}
+    </div>
+  {/each}
   <div>
     {current}
   </div>
-  <div id="keys">
-    {#each keys_name as row}
-      <div>
-        {#each row as key}
-          <button disabled={checkKey(key)} on:click={handleClick(key)}
-            >{key}</button
-          >
-        {/each}
-      </div>
-    {/each}
-  </div>
+  {#each buttons as button}
+    <button on:click={handleClick(button)}>{button}</button>
+  {/each}
 </div>

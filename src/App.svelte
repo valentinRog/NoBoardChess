@@ -1,11 +1,8 @@
 <script>
-  import Infos from "./lib/Infos.svelte";
-  import Pieces from "./lib/Pieces.svelte";
-  import Inputs from "./lib/Inputs.svelte";
-  import Board from "./lib/Board.svelte";
+  import Game from "./lib/Game.svelte";
 
   const get_puzzle = async () => {
-    const res = await fetch("http://127.0.0.1:5000/puzzle");
+    const res = await fetch("http://127.0.0.1:5000/");
     const puzzle = await res.json();
 
     if (res.ok) {
@@ -23,10 +20,5 @@
 {#await promise}
   ...
 {:then puzzle}
-  <div>
-    <Infos {puzzle} />
-    <Pieces pieces={puzzle.pieces} />
-    <Inputs {puzzle} />
-    <Board {puzzle} />
-  </div>
+  <Game {puzzle}/>
 {/await}
