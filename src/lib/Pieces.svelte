@@ -85,5 +85,6 @@
   #pieces > div {
     display: flex;
     justify-content: center;
+    background-color: #21222c;
   }
 </style>

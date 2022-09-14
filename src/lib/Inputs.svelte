@@ -48,7 +48,7 @@
   <div id="line">
   {#each moves as _, i}
     <div>
-      <Move {puzzle} index={i} />
+      <Move {puzzle} moveIndex={i} />
     </div>
   {/each}
   </div>
@@ -69,4 +69,5 @@
   #line > div {
     margin: 0 5px;
   }
+
 </style>

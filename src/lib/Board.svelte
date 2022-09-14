@@ -19,52 +19,48 @@
     });
   });
 
-  let index = 0;
-  $: board && board.setPosition(puzzle.fens[index], true);
+  let fenIndex = 0;
+  $: board && board.setPosition(puzzle.fens[fenIndex], true);
 </script>
 
 <div id="chessboard" />
 <div id="controls">
   <button
     on:click={() => {
-      index = 0;
+      fenIndex = 0;
     }}>{"<<"}</button
   >
   <button
     on:click={() => {
-      if (index) {
-        index--;
+      if (fenIndex) {
+        fenIndex--;
       }
     }}>{"<"}</button
   >
   <button
     on:click={() => {
-      if (index < puzzle.san_moves.length) {
-        index++;
+      if (fenIndex < puzzle.san_moves.length) {
+        fenIndex++;
       }
     }}>{">"}</button
   >
   <button
     on:click={() => {
-      index = puzzle.san_moves.length;
+      fenIndex = puzzle.san_moves.length;
     }}>{">>"}</button
   >
 </div>
 <div id="line">
   {#each puzzle.san_moves as _, i}
-    <div
-      class:active={index === i + 1}
-      on:click={() => {
-        index = i + 1;
-      }}
-    >
-      <Move {puzzle} index={i} />
-    </div>
+      <Move {puzzle} moveIndex={i} bind:activeFenIndex={fenIndex}/>
   {/each}
 </div>
 
 <style>
-  .active {
-    border: 1px solid white;
+
+  #line {
+    display: flex;
+    justify-content: center;
   }
+
 </style>
