@@ -10,10 +10,10 @@
 
 <div id="game">
   {#if guessing}
-  <Infos {puzzle} />
-  <Pieces pieces={puzzle.pieces} />
-  <Inputs {puzzle} bind:guessing={guessing}/>
+    <Infos {puzzle} />
+    <Pieces pieces={puzzle.pieces} />
+    <Inputs {puzzle} bind:guessing />
   {:else}
-  <Board {puzzle} />
+    <Board {puzzle} />
   {/if}
 </div>

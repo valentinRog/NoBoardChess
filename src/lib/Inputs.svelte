@@ -2,7 +2,8 @@
   export let puzzle;
   export let guessing;
 
-  const trait = puzzle.fens[1].split(" ")[1];
+  import Line from "./Line.svelte";
+
   let index = 1;
   $: move = puzzle.san_moves[index];
   $: moves = puzzle.san_moves.slice(0, index);
@@ -24,15 +25,6 @@
     }
   }
 
-  const getPrefix = (i) => {
-    let prefix =
-      trait === "w"
-        ? String(Math.floor(i / 2) + 1)
-        : String(Math.ceil(i / 2) + 1);
-    prefix += (i + Number(trait === "b")) % 2 ? "..." : ".";
-    return prefix;
-  };
-
   const handleClick = (letter) => {
     return () => {
       if (letter === move[current.length]) {
@@ -50,11 +42,7 @@
 </script>
 
 <div>
-  {#each moves as move, i}
-    <div>
-      {getPrefix(i)}{move}
-    </div>
-  {/each}
+  <Line {puzzle} {moves} />
   <div>
     {current}
   </div>
