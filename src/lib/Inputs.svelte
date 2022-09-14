@@ -2,7 +2,7 @@
   export let puzzle;
   export let guessing;
 
-  import Line from "./Line.svelte";
+  import Move from "./Move.svelte";
 
   let index = 1;
   $: move = puzzle.san_moves[index];
@@ -42,7 +42,9 @@
 </script>
 
 <div>
-  <Line {puzzle} {moves} />
+  {#each moves as _, i}
+    <Move {puzzle} index={i} />
+  {/each}
   <div>
     {current}
   </div>
