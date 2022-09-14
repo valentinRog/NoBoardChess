@@ -9,26 +9,28 @@
   $: moves = puzzle.san_moves.slice(0, index);
   let current = "";
 
-  let buttons = [];
-  $: {
-    buttons = [];
-    if (index < puzzle.legal_san_moves.length) {
+  const getKeys = () => {
+    let keys = [];
+    if (index < puzzle.legal_san_moves.length && current !== move) {
       puzzle.legal_san_moves[index].forEach((move) => {
-        if (
-          move.startsWith(current) &&
-          !buttons.includes(move[current.length])
-        ) {
-          buttons = [...buttons, move[current.length]];
+        if (move.startsWith(current) && !keys.includes(move[current.length])) {
+          keys = [...keys, move[current.length]];
         }
       });
-      buttons = buttons.sort();
+      keys = keys.sort();
     }
-  }
+    return keys;
+  };
+
+  let buttons = getKeys();
 
   const handleClick = (letter) => {
     return () => {
       if (letter === move[current.length]) {
         current += letter;
+        while (getKeys().length === 1) {
+          current += getKeys()[0];
+        }
         if (current === move) {
           index += 2;
           current = "";
@@ -36,15 +38,20 @@
             guessing = false;
           }
         }
+        buttons = getKeys();
       }
     };
   };
 </script>
 
 <div>
+  <div id="line">
   {#each moves as _, i}
-    <Move {puzzle} index={i} />
+    <div>
+      <Move {puzzle} index={i} />
+    </div>
   {/each}
+  </div>
   <div>
     {current}
   </div>
@@ -52,3 +59,14 @@
     <button on:click={handleClick(button)}>{button}</button>
   {/each}
 </div>
+
+<style>
+  #line {
+    display: flex;
+    justify-content: center;
+  }
+
+  #line > div {
+    margin: 0 5px;
+  }
+</style>

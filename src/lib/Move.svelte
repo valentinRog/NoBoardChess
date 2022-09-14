@@ -8,12 +8,12 @@
     return Number(fen.split(" ").at(-1));
   };
   const ply = 1 + getPly(puzzle.fens[index + 1]) - getPly(puzzle.fens[1]);
-  move += String(ply) + (color === "w" ? "." : "...");
+  if (!index || color === "w") {
+    move += String(ply) + (color === "w" ? ". " : "... ");
+  }
   move += puzzle.san_moves[index];
 </script>
 
-<div class={color}>
-  <strong>
-    {move}
-  </strong>
-</div>
+<strong>
+  {move}
+</strong>
