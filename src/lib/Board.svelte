@@ -29,7 +29,6 @@
       <div id="chessboard" />
     </div>
     <div id="controls">
-      <div class="container">
         <button
           on:click={() => {
             fenIndex = 0;
@@ -54,7 +53,6 @@
             fenIndex = puzzle.san_moves.length;
           }}>{">>"}</button
         >
-      </div>
     </div>
   </div>
   <div id="line">
