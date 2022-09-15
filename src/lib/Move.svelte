@@ -31,6 +31,15 @@
   div {
     padding: 0.5em;
     border-radius: 0.3em;
+    margin: 0.6em 0;
+  }
+
+  div:first-of-type {
+    margin-top: 0;
+  }
+
+  div:last-of-type {
+    margin-bottom: 0;
   }
 
   .active {

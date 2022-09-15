@@ -47,7 +47,7 @@
 
 <div id="pieces">
   {#each color_pieces as color}
-    <div class={color.color}>
+    <div class="{color.color} container">
       {#each Object.keys(color.pieces) as piece_type}
       <div class={piece_type}>
         <img src={img_srcs[piece_type]} alt="yo" />
@@ -85,6 +85,5 @@
   #pieces > div {
     display: flex;
     justify-content: center;
-    background-color: #21222c;
   }
 </style>

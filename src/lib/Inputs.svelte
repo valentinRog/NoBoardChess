@@ -45,7 +45,7 @@
 </script>
 
 <div>
-  <div id="line">
+  <div id="line" class="container">
   {#each moves as _, i}
     <div>
       <Move {puzzle} moveIndex={i} />
@@ -62,7 +62,7 @@
 
 <style>
   #line {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
   }
 

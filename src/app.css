@@ -19,7 +19,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
+  min-width: 500px;
   min-height: 100vh;
 }
 
@@ -28,6 +28,13 @@ body {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+.container {
+  background-color: #21222c;
+  padding: 0.9em;
+  margin: 0.5em;
+  border-radius: 0.4em;
 }
 
 button {
