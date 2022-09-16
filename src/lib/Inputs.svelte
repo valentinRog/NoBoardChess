@@ -1,7 +1,7 @@
 <script>
   export let puzzle;
   export let guessing;
-  export let failedMove;
+  export let failedMove = undefined;
 
   import Move from "./Move.svelte";
 

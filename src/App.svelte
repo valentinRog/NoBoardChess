@@ -1,5 +1,5 @@
 <script>
-  import Rush from "./lib/Rush.svelte"
+  import Game from "./lib/Game.svelte";
 </script>
 
-<Rush />
+<Game />

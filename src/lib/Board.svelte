@@ -79,14 +79,6 @@
     width: 50vw;
   }
 
-  .won {
-    border: 6px solid green;
-  }
-
-  .lost {
-    border: 6px solid red;
-  }
-
   #controls {
     display: flex;
     justify-content: center;
