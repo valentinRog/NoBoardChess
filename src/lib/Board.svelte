@@ -7,6 +7,7 @@
   import Move from "./Move.svelte";
 
   export let puzzle;
+  export let failedMove;
 
   let board;
 
@@ -15,6 +16,9 @@
       position: puzzle.fen,
       sprite: {
         url: Sprites,
+      },
+      style: {
+        cssClass: "black-and-white",
       },
     });
   });
@@ -25,40 +29,40 @@
 
 <div id="answer">
   <div id="board">
-    <div class="container">
+    <div class="container" >
       <div id="chessboard" />
     </div>
     <div id="controls">
-        <button
-          on:click={() => {
-            fenIndex = 0;
-          }}>{"<<"}</button
-        >
-        <button
-          on:click={() => {
-            if (fenIndex) {
-              fenIndex--;
-            }
-          }}>{"<"}</button
-        >
-        <button
-          on:click={() => {
-            if (fenIndex < puzzle.san_moves.length) {
-              fenIndex++;
-            }
-          }}>{">"}</button
-        >
-        <button
-          on:click={() => {
-            fenIndex = puzzle.san_moves.length;
-          }}>{">>"}</button
-        >
+      <button
+        on:click={() => {
+          fenIndex = 0;
+        }}>{"<<"}</button
+      >
+      <button
+        on:click={() => {
+          if (fenIndex) {
+            fenIndex--;
+          }
+        }}>{"<"}</button
+      >
+      <button
+        on:click={() => {
+          if (fenIndex < puzzle.san_moves.length) {
+            fenIndex++;
+          }
+        }}>{">"}</button
+      >
+      <button
+        on:click={() => {
+          fenIndex = puzzle.san_moves.length;
+        }}>{">>"}</button
+      >
     </div>
   </div>
   <div id="line">
     <div class="container">
       {#each puzzle.san_moves as _, i}
-        <Move {puzzle} moveIndex={i} bind:activeFenIndex={fenIndex} />
+        <Move {puzzle} moveIndex={i} bind:activeFenIndex={fenIndex} failed={i === failedMove}/>
       {/each}
     </div>
   </div>
@@ -73,6 +77,14 @@
     min-width: 400px;
     max-width: 700px;
     width: 50vw;
+  }
+
+  .won {
+    border: 6px solid green;
+  }
+
+  .lost {
+    border: 6px solid red;
   }
 
   #controls {

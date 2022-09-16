@@ -2,6 +2,7 @@
   export let puzzle;
   export let moveIndex;
   export let activeFenIndex = undefined;
+  export let failed = false;
 
   let move = "";
   const color = puzzle.fens[moveIndex + 1].split(" ")[1];
@@ -16,6 +17,8 @@
 <div
   class={color}
   class:active={activeFenIndex === moveIndex + 1}
+  class:failed={failed}
+  class:pointer={activeFenIndex !== undefined}
   on:click={() => {
     if (activeFenIndex !== undefined) {
       activeFenIndex = moveIndex + 1;
@@ -32,6 +35,7 @@
     padding: 0.5em;
     border-radius: 0.3em;
     margin: 0.6em 0;
+    border: 2px solid transparent;
   }
 
   div:first-of-type {
@@ -43,7 +47,7 @@
   }
 
   .active {
-    border: 2px solid white;
+    border-color: white;
   }
 
   .w {
@@ -52,5 +56,9 @@
 
   .b {
     background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .failed {
+    color: red;
   }
 </style>

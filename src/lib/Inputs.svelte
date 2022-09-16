@@ -1,9 +1,11 @@
 <script>
   export let puzzle;
   export let guessing;
+  export let failedMove;
 
   import Move from "./Move.svelte";
 
+  failedMove = undefined;
   let index = 1;
   $: move = puzzle.san_moves[index];
   $: moves = puzzle.san_moves.slice(0, index);
@@ -39,6 +41,9 @@
           }
         }
         buttons = getKeys();
+      } else {
+        failedMove = index;
+        guessing = false;
       }
     };
   };
