@@ -1,11 +1,10 @@
 <script>
   export let puzzle;
-  export let guessing;
-  export let failedMove = undefined;
+  export let game;
 
   import Move from "./Move.svelte";
 
-  failedMove = undefined;
+  game.failedMove = undefined;
   let index = 1;
   $: move = puzzle.san_moves[index];
   $: moves = puzzle.san_moves.slice(0, index);
@@ -37,13 +36,13 @@
           index += 2;
           current = "";
           if (index > puzzle.san_moves.length - 1) {
-            guessing = false;
+            game.guessing = false;
           }
         }
         buttons = getKeys();
       } else {
-        failedMove = index;
-        guessing = false;
+        game.failedMove = index;
+        game.guessing = false;
       }
     };
   };

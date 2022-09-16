@@ -17,21 +17,22 @@
   };
   let promise = get_puzzle();
 
-  let failedMove;
-  let guessing = true;
-
-  let level = 1;
-  let lives = 3;
+  let game = {
+    failedMove: undefined,
+    guessing: true,
+    level: 1,
+    lives: 3,
+  };
 </script>
 
 <div id="game">
   {#await promise then puzzle}
-    <Infos {puzzle} {level} {lives}/>
-    {#if guessing}
+    <Infos {puzzle} {game}/>
+    {#if game.guessing}
       <Pieces pieces={puzzle.pieces} />
-      <Inputs {puzzle} bind:guessing bind:failedMove />
+      <Inputs {puzzle} bind:game />
     {:else}
-      <Board {puzzle} {failedMove} />
+      <Board {puzzle} {game} />
     {/if}
   {/await}
 </div>

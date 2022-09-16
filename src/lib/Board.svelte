@@ -7,7 +7,7 @@
   import Move from "./Move.svelte";
 
   export let puzzle;
-  export let failedMove;
+  export let game;
 
   let board;
 
@@ -29,7 +29,7 @@
 
 <div id="answer">
   <div id="board">
-    <div class="container" >
+    <div class="container">
       <div id="chessboard" />
     </div>
     <div id="controls">
@@ -62,7 +62,12 @@
   <div id="line">
     <div class="container">
       {#each puzzle.san_moves as _, i}
-        <Move {puzzle} moveIndex={i} bind:activeFenIndex={fenIndex} failed={i === failedMove}/>
+        <Move
+          {puzzle}
+          moveIndex={i}
+          bind:activeFenIndex={fenIndex}
+          failed={i === game.failedMove}
+        />
       {/each}
     </div>
   </div>
@@ -76,7 +81,7 @@
   #board {
     min-width: 400px;
     max-width: 700px;
-    width: 50vw;
+    width: 65vh;
   }
 
   #controls {

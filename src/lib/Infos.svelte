@@ -1,26 +1,46 @@
 <script>
   export let puzzle;
-  export let level;
-  export let lives;
+  export let game;
 
   import heart from "../assets/heart.svg";
 </script>
 
 <div class="container">
-  <ul>
-    <li>Level: {level}</li>
-    <li>Rating: {puzzle.elo}</li>
-    <li>Number of pieces: {puzzle.n_pieces}</li>
-  </ul>
+  <div id="level">
+    #{game.level}
+  </div>
   <div id="lives">
-    {#each Array(lives) as _}
+    {#each Array(game.lives) as _}
       <img src={heart} alt="yo" />
     {/each}
+  </div>
+  <div>
+    <ul>
+      <li>Rating: {puzzle.elo}</li>
+      <li>Number of pieces: {puzzle.n_pieces}</li>
+    </ul>
   </div>
 </div>
 
 <style>
+  .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
   img {
-    width: 50px;
+    width: 40px;
+  }
+
+  ul {
+    list-style: none;
+    text-align: left;
+    padding: 0;
+  }
+
+  #level {
+    font-size: 30px;
+    font-weight: bold;
   }
 </style>
