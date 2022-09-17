@@ -4,10 +4,13 @@
   import Board from "./Board.svelte";
   import Infos from "./Infos.svelte";
 
-  const get_puzzle = async () => {
-    const res = await fetch("https://valenbel123.pythonanywhere.com/");
-    const puzzle = await res.json();
+  let level = 1;
 
+  const get_puzzle = async () => {
+    const res = await fetch(
+      `https://valenbel123.pythonanywhere.com/level/${level}`
+    );
+    const puzzle = await res.json();
     if (res.ok) {
       console.log(puzzle);
       return puzzle;
@@ -20,19 +23,25 @@
   let game = {
     failedMove: undefined,
     guessing: true,
-    level: 1,
+    level: level,
     lives: 3,
+    fails: 0,
   };
+
+  $: if (level < game.level) {
+    level = game.level;
+    promise = get_puzzle();
+  }
 </script>
 
 <div id="game">
   {#await promise then puzzle}
-    <Infos {puzzle} {game}/>
+    <Infos {puzzle} bind:game />
     {#if game.guessing}
       <Pieces pieces={puzzle.pieces} />
       <Inputs {puzzle} bind:game />
     {:else}
-      <Board {puzzle} {game} />
+      <Board {puzzle} bind:game />
     {/if}
   {/await}
 </div>

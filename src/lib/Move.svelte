@@ -5,7 +5,7 @@
   export let failed = false;
 
   let move = "";
-  const color = puzzle.fens[moveIndex + 1].split(" ")[1];
+  const color = puzzle.fens[moveIndex].split(" ")[1];
   const getPly = (fen) => {
     return Number(fen.split(" ").at(-1));
   };

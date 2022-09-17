@@ -64,8 +64,8 @@
 
 <style>
   img {
-    width: 100px;
-    height: 100px;
+    width: 7vw;
+    min-width: 60px;
   }
 
   ul {
@@ -75,6 +75,7 @@
   li {
     list-style-type: none;
     text-align: center;
+    font-size: 1.2em;
 }
 
   #pieces {

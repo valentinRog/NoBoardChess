@@ -1,19 +1,27 @@
 <script>
   import { onMount } from "svelte";
-  import { Chessboard } from "cm-chessboard/src/cm-chessboard/Chessboard";
+  import {
+    Chessboard,
+    COLOR,
+  } from "cm-chessboard/src/cm-chessboard/Chessboard";
   import Sprites from "cm-chessboard/assets/images/chessboard-sprite-staunty.svg";
   import "cm-chessboard/assets/styles/cm-chessboard.css";
 
   import Move from "./Move.svelte";
 
+  import chevronRight from "../assets/chevron_right.svg";
+  import chevronLeft from "../assets/chevron_left.svg";
+  import firstPage from "../assets/first_page.svg";
+  import lastPage from "../assets/last_page.svg";
+
   export let puzzle;
   export let game;
 
   let board;
-
   onMount(() => {
     board = new Chessboard(document.getElementById("chessboard"), {
       position: puzzle.fen,
+      orientation: puzzle.fen.split(" ")[1] === "b" ? COLOR.white : COLOR.black,
       sprite: {
         url: Sprites,
       },
@@ -36,26 +44,26 @@
       <button
         on:click={() => {
           fenIndex = 0;
-        }}>{"<<"}</button
+        }}><img src={firstPage} alt="first" /></button
       >
       <button
         on:click={() => {
           if (fenIndex) {
             fenIndex--;
           }
-        }}>{"<"}</button
+        }}><img src={chevronLeft} alt="prev" /></button
       >
       <button
         on:click={() => {
           if (fenIndex < puzzle.san_moves.length) {
             fenIndex++;
           }
-        }}>{">"}</button
+        }}><img src={chevronRight} alt="next" /></button
       >
       <button
         on:click={() => {
           fenIndex = puzzle.san_moves.length;
-        }}>{">>"}</button
+        }}><img src={lastPage} alt="last" /></button
       >
     </div>
   </div>
@@ -66,7 +74,7 @@
           {puzzle}
           moveIndex={i}
           bind:activeFenIndex={fenIndex}
-          failed={i === game.failedMove}
+          failed={i === game.failedMoveIndex}
         />
       {/each}
     </div>
@@ -87,5 +95,11 @@
   #controls {
     display: flex;
     justify-content: center;
+  }
+
+  img {
+    width: 1.5em;
+    filter: invert(100%) sepia(0%) saturate(7494%) hue-rotate(346deg) brightness(100%) contrast(104%);
+    vertical-align: middle;
   }
 </style>

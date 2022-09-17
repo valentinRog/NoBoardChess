@@ -4,7 +4,7 @@
 
   import Move from "./Move.svelte";
 
-  game.failedMove = undefined;
+  game.failedMoveIndex = undefined;
   let index = 1;
   $: move = puzzle.san_moves[index];
   $: moves = puzzle.san_moves.slice(0, index);
@@ -41,7 +41,8 @@
         }
         buttons = getKeys();
       } else {
-        game.failedMove = index;
+        game.failedMoveIndex = index;
+        game.fails++;
         game.guessing = false;
       }
     };
