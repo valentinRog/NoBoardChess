@@ -40,14 +40,6 @@
     font-size: 1.1rem;
   }
 
-  /* div:first-of-type {
-    margin-top: 0;
-  }
-
-  div:last-of-type {
-    margin-bottom: 0;
-  } */
-
   .active {
     border-color: white;
   }
