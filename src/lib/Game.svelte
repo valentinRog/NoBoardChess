@@ -4,7 +4,7 @@
   import Board from "./Board.svelte";
   import Infos from "./Infos.svelte";
 
-  let level = 100;
+  let level = 1;
 
   const get_puzzle = async () => {
     const res = await fetch(
