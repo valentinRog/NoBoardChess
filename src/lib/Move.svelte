@@ -32,7 +32,7 @@
   div {
     padding: 0.6rem;
     border-radius: 0.3rem;
-    margin: 0.6rem 0;
+    margin: 0.6rem 0.2rem;
     border: 0.2rem solid transparent;
     vertical-align: center;
     display: flex;
@@ -40,13 +40,13 @@
     font-size: 1.1rem;
   }
 
-  div:first-of-type {
+  /* div:first-of-type {
     margin-top: 0;
   }
 
   div:last-of-type {
     margin-bottom: 0;
-  }
+  } */
 
   .active {
     border-color: white;

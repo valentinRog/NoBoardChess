@@ -86,25 +86,39 @@
     display: flex;
   }
 
+  
   #board {
     min-width: 30rem;
-    max-width: 70rem;
-    width: 65vh;
+    width: 66vh;
+    max-width: 65vw;
+    margin: 0 auto;
   }
-
+  
   #controls {
     display: flex;
     justify-content: center;
   }
-
+  
   img {
     width: 2rem;
-    filter: invert(100%) sepia(0%) saturate(7494%) hue-rotate(346deg) brightness(100%) contrast(104%);
+    filter: invert(100%) sepia(0%) saturate(7494%) hue-rotate(346deg)
+    brightness(100%) contrast(104%);
     vertical-align: middle;
   }
-
-  #line > div{
+  
+  #line > div {
     max-height: 100%;
     overflow-y: auto;
+  }
+
+  @media only screen and (max-width: 800px) {
+    #answer {
+      flex-direction: column;
+    }
+    #line > div.container {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+    }
   }
 </style>
