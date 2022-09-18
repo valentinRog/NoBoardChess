@@ -87,8 +87,8 @@
   }
 
   #board {
-    min-width: 400px;
-    max-width: 700px;
+    min-width: 30rem;
+    max-width: 70rem;
     width: 65vh;
   }
 
@@ -98,8 +98,13 @@
   }
 
   img {
-    width: 1.5em;
+    width: 2rem;
     filter: invert(100%) sepia(0%) saturate(7494%) hue-rotate(346deg) brightness(100%) contrast(104%);
     vertical-align: middle;
+  }
+
+  #line > div{
+    max-height: 100%;
+    overflow-y: auto;
   }
 </style>

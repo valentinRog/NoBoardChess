@@ -68,11 +68,12 @@
 <style>
   #line {
     display: inline-flex;
+    flex-wrap: wrap;
     justify-content: center;
   }
 
   #line > div {
-    margin: 0 5px;
+    margin: 0.15rem 0.3rem;
   }
 
 </style>

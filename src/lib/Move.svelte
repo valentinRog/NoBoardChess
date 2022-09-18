@@ -25,17 +25,19 @@
     }
   }}
 >
-  <strong>
     {move}
-  </strong>
 </div>
 
 <style>
   div {
-    padding: 0.5em;
-    border-radius: 0.3em;
-    margin: 0.6em 0;
-    border: 2px solid transparent;
+    padding: 0.6rem;
+    border-radius: 0.3rem;
+    margin: 0.6rem 0;
+    border: 0.2rem solid transparent;
+    vertical-align: center;
+    display: flex;
+    justify-content: center;
+    font-size: 1.1rem;
   }
 
   div:first-of-type {

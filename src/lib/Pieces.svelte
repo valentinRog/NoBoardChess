@@ -65,7 +65,8 @@
 <style>
   img {
     width: 7vw;
-    min-width: 60px;
+    min-width: 5rem;
+    max-width: 7rem;
   }
 
   ul {
@@ -75,12 +76,14 @@
   li {
     list-style-type: none;
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
   #pieces {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   #pieces > div {

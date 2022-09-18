@@ -52,7 +52,7 @@
   }
 
   div.container > div {
-    margin: 0 2em;
+    margin: 0 20px;
   }
 
   div#lives {
@@ -80,7 +80,7 @@
   }
 
   #level {
-    font-size: 30px;
+    font-size: 2.5rem;
     font-weight: bold;
   }
 </style>
