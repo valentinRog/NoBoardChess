@@ -4,7 +4,7 @@
 
   import Move from "./Move.svelte";
 
-  game.failedMoveIndex = undefined;
+  game.failedMoveIndex = null;
   let index = 1;
   $: move = puzzle.san_moves[index];
   $: moves = puzzle.san_moves.slice(0, index);
@@ -50,12 +50,12 @@
 </script>
 
 <div>
-  <div id="line" class="container">
-  {#each moves as _, i}
-    <div>
-      <Move {puzzle} moveIndex={i} />
-    </div>
-  {/each}
+  <div id="line">
+    {#each moves as _, i}
+      <div>
+        <Move {puzzle} moveIndex={i} />
+      </div>
+    {/each}
   </div>
   <div>
     {current}
@@ -65,15 +65,12 @@
   {/each}
 </div>
 
-<style>
+<style lang="scss">
+  @import "../style/vars";
+  @import "../style/mix";
+
   #line {
-    display: inline-flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    @include container;
+    @include line(row);
   }
-
-  #line > div {
-    margin: 0.15rem 0.3rem;
-  }
-
 </style>

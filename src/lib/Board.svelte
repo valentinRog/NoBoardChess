@@ -33,6 +33,23 @@
 
   let fenIndex = 0;
   $: board && board.setPosition(puzzle.fens[fenIndex], true);
+
+  const first = () => {
+    fenIndex = 0;
+  };
+  const prev = () => {
+    if (fenIndex) {
+      fenIndex--;
+    }
+  };
+  const next = () => {
+    if (fenIndex < puzzle.san_moves.length) {
+      fenIndex++;
+    }
+  };
+  const last = () => {
+    fenIndex = puzzle.san_moves.length;
+  };
 </script>
 
 <div id="answer">
@@ -41,84 +58,65 @@
       <div id="chessboard" />
     </div>
     <div id="controls">
-      <button
-        on:click={() => {
-          fenIndex = 0;
-        }}><img src={firstPage} alt="first" /></button
-      >
-      <button
-        on:click={() => {
-          if (fenIndex) {
-            fenIndex--;
-          }
-        }}><img src={chevronLeft} alt="prev" /></button
-      >
-      <button
-        on:click={() => {
-          if (fenIndex < puzzle.san_moves.length) {
-            fenIndex++;
-          }
-        }}><img src={chevronRight} alt="next" /></button
-      >
-      <button
-        on:click={() => {
-          fenIndex = puzzle.san_moves.length;
-        }}><img src={lastPage} alt="last" /></button
-      >
+      <button on:click={first}><img src={firstPage} alt="first" /></button>
+      <button on:click={prev}><img src={chevronLeft} alt="prev" /></button>
+      <button on:click={next}><img src={chevronRight} alt="next" /></button>
+      <button on:click={last}><img src={lastPage} alt="last" /></button>
     </div>
   </div>
+  <div>
   <div id="line">
-    <div class="container">
-      {#each puzzle.san_moves as _, i}
-        <Move
-          {puzzle}
-          moveIndex={i}
-          bind:activeFenIndex={fenIndex}
-          failed={i === game.failedMoveIndex}
-        />
-      {/each}
-    </div>
+    {#each puzzle.san_moves as _, i}
+      <div>
+        <Move {puzzle} moveIndex={i} failed={i === game.failedMoveIndex} bind:activeFenIndex={fenIndex}/>
+      </div>
+    {/each}
   </div>
 </div>
+</div>
 
-<style>
+<style lang="scss">
+  @import "../style/vars";
+  @import "../style/mix";
+
   #answer {
     display: flex;
   }
 
-  
+  .container {
+    @include container;
+  }
+
   #board {
     min-width: 30rem;
     width: 66vh;
     max-width: 65vw;
     margin: 0 auto;
   }
-  
+
   #controls {
     display: flex;
     justify-content: center;
   }
-  
+
   img {
     width: 2rem;
     filter: invert(100%) sepia(0%) saturate(7494%) hue-rotate(346deg)
-    brightness(100%) contrast(104%);
+      brightness(100%) contrast(104%);
     vertical-align: middle;
   }
-  
-  #line > div {
-    max-height: 100%;
-    overflow-y: auto;
+
+  #line {
+    @include container;
+    @include line(column);
   }
 
   @media only screen and (max-width: 800px) {
     #answer {
       flex-direction: column;
     }
-    #line > div.container {
-     display: flex;
-     flex-wrap: wrap;
-     justify-content: center;
+    #line {
+      @include line(row);
     }
   }
 </style>

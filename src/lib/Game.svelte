@@ -21,7 +21,7 @@
   let promise = get_puzzle();
 
   let game = {
-    failedMove: undefined,
+    failedMoveIndex: null,
     guessing: true,
     level: level,
     lives: 3,

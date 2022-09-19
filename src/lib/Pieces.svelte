@@ -50,7 +50,7 @@
     <div class="{color.color} container">
       {#each Object.keys(color.pieces) as piece_type}
       <div class={piece_type}>
-        <img src={img_srcs[piece_type]} alt="yo" />
+        <img src={img_srcs[piece_type]} alt="{piece_type}" />
         <ul>
             {#each color.pieces[piece_type] as square}
                 <li>{square}</li>
@@ -62,7 +62,14 @@
   {/each}
 </div>
 
-<style>
+<style lang="scss">
+  @import "../style/vars";
+  @import "../style/mix";
+
+  .container {
+    @include container;
+  }
+
   img {
     width: 7vw;
     min-width: 5rem;

@@ -1,3 +1,6 @@
+@import "vars";
+@import "mix";
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -5,8 +8,8 @@
   font-weight: bold;
 
   color: rgba(255, 255, 255, 0.87);
-  background-color: #282a36;
-  
+  background-color: $background-color;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -28,20 +31,13 @@ body {
   text-align: center;
 }
 
-.container {
-  background-color: #21222c;
-  padding: 0.9rem;
-  margin: 0.5rem;
-  border-radius: 0.4rem;
-}
-
 .pointer {
   cursor: pointer;
 }
 
 button {
   border-radius: 0.6rem;
-  border: 0.15rem solid #ff79c6;
+  border: 0.15rem solid $pink;
   margin: 0.2rem;
   padding: 0.4rem 0.6rem;
   font-size: 1.5rem;

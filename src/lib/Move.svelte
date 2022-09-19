@@ -1,7 +1,7 @@
 <script>
   export let puzzle;
   export let moveIndex;
-  export let activeFenIndex = undefined;
+  export let activeFenIndex = null;
   export let failed = false;
 
   let move = "";
@@ -17,27 +17,25 @@
 <div
   class={color}
   class:active={activeFenIndex === moveIndex + 1}
-  class:failed={failed}
-  class:pointer={activeFenIndex !== undefined}
+  class:failed
+  class:pointer={activeFenIndex !== null}
   on:click={() => {
-    if (activeFenIndex !== undefined) {
+    if (activeFenIndex !== null) {
       activeFenIndex = moveIndex + 1;
     }
   }}
 >
-    {move}
+  {move}
 </div>
 
-<style>
+<style lang="scss">
+  @import "../style/vars";
+
   div {
-    padding: 0.6rem;
-    border-radius: 0.3rem;
-    margin: 0.6rem 0.2rem;
-    border: 0.2rem solid transparent;
+    padding: 0.5rem;
+    border-radius: $radius;
+    border: 2px solid transparent;
     vertical-align: center;
-    display: flex;
-    justify-content: center;
-    font-size: 1.1rem;
   }
 
   .active {
@@ -45,14 +43,14 @@
   }
 
   .w {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: $light-white;
   }
 
   .b {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: $light-black;
   }
 
   .failed {
-    color: red;
+    color: $red;
   }
 </style>

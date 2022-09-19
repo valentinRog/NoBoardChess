@@ -6,16 +6,16 @@
   import brokenHeart from "../assets/broken_heart.svg";
 </script>
 
-<div class="container">
+<div id="infos">
   <div id="level">
     #{game.level}
   </div>
   <div id="lives">
     {#each Array(game.lives - game.fails) as _}
-      <img src={heart} alt="yo" class="heart" />
+      <img src={heart} alt="heart" class="heart" />
     {/each}
     {#each Array(game.fails) as _}
-      <img src={brokenHeart} alt="yo" class="broken-heart" />
+      <img src={brokenHeart} alt="broken heart" class="broken-heart" />
     {/each}
   </div>
   {#if !game.guessing}
@@ -44,43 +44,41 @@
   </div>
 </div>
 
-<style>
-  div.container {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
+<style lang="scss">
+  @import "../style/vars";
+  @import "../style/mix";
 
-  div.container > div {
-    margin: 0 20px;
-  }
-
-  div#lives {
+  #infos {
+    @include container;
     display: flex;
-  }
+    justify-content: center;
+    align-items: center;
 
-  img {
-    width: 40px;
-  }
+    & > div {
+      margin: 0 2rem;
 
-  img.heart {
-    filter: invert(74%) sepia(92%) saturate(5896%) hue-rotate(96deg)
-      brightness(130%) contrast(123%);
-  }
+      &#level {
+        font-size: 2.5rem;
+        font-weight: bold;
+      }
 
-  img.broken-heart {
-    filter: invert(23%) sepia(75%) saturate(6495%) hue-rotate(355deg)
-      brightness(113%) contrast(126%);
-  }
-
-  ul {
-    list-style: none;
-    text-align: left;
-    padding: 0;
-  }
-
-  #level {
-    font-size: 2.5rem;
-    font-weight: bold;
+      &#lives {
+        display: inline-flex;
+        img {
+          width: 3rem;
+          &.heart {
+            @include to-green;
+          }
+          &.broken-heart {
+            @include to-red;
+          }
+        }
+      }
+      ul {
+        list-style: none;
+        text-align: left;
+        padding: 0;
+      }
+    }
   }
 </style>
