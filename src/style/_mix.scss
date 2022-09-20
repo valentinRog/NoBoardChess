@@ -8,12 +8,17 @@
 }
 
 @mixin line($direction) {
-  display: inline-flex;
-  flex-direction: $direction;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: block;
+  @if $direction == row {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  } @else {
+    max-height: calc($board-size - 2 * 0.3rem - 2 * 0.9rem - 1 * 0.5rem);
+  }
   div {
-    margin: 0.15rem 0.3rem;
+    margin: 0.3rem 0.3rem;
   }
 }
 

@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "cm-chessboard": "^5.2.3",
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "smooth-scrollbar": "^8.8.1"
   }
 }

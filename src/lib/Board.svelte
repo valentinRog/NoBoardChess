@@ -6,6 +6,7 @@
   } from "cm-chessboard/src/cm-chessboard/Chessboard";
   import Sprites from "cm-chessboard/assets/images/chessboard-sprite-staunty.svg";
   import "cm-chessboard/assets/styles/cm-chessboard.css";
+  import Scrollbar from 'smooth-scrollbar';
 
   import Move from "./Move.svelte";
 
@@ -29,6 +30,7 @@
         cssClass: "black-and-white",
       },
     });
+    Scrollbar.init(document.querySelector('.my-scrollbar'), {});
   });
 
   let fenIndex = 0;
@@ -65,7 +67,7 @@
     </div>
   </div>
   <div>
-  <div id="line">
+  <div id="line" class="my-scrollbar">
     {#each puzzle.san_moves as _, i}
       <div>
         <Move {puzzle} moveIndex={i} failed={i === game.failedMoveIndex} bind:activeFenIndex={fenIndex}/>
@@ -88,9 +90,7 @@
   }
 
   #board {
-    min-width: 30rem;
-    width: 66vh;
-    max-width: 65vw;
+    width: $board-size;
     margin: 0 auto;
   }
 
