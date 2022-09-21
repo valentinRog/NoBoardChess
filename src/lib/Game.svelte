@@ -1,7 +1,7 @@
 <script>
   import Pieces from "./Pieces.svelte";
   import Inputs from "./Inputs.svelte";
-  import Board from "./Board.svelte";
+  import Answer from "./Answer.svelte";
   import Infos from "./Infos.svelte";
 
   let level = 1;
@@ -41,7 +41,7 @@
       <Pieces pieces={puzzle.pieces} />
       <Inputs {puzzle} bind:game />
     {:else}
-      <Board {puzzle} bind:game />
+      <Answer {puzzle} bind:game />
     {/if}
   {/await}
 </div>

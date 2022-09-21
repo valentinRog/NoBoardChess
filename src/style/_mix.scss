@@ -15,7 +15,7 @@
     flex-wrap: wrap;
     justify-content: center;
   } @else {
-    max-height: calc($board-size - 2 * 0.3rem - 2 * 0.9rem - 1 * 0.5rem);
+    // max-height: calc($board-size - 2 * 0.3rem - 2 * 0.9rem - 1 * 0.5rem);
   }
   div {
     margin: 0.3rem 0.3rem;
@@ -30,4 +30,9 @@
 @mixin to-green() {
   filter: invert(50%) sepia(48%) saturate(2955%) hue-rotate(87deg)
     brightness(123%) contrast(120%);
+}
+
+@mixin to-white() {
+  filter: invert(100%) sepia(0%) saturate(7494%) hue-rotate(346deg)
+  brightness(100%) contrast(104%);
 }

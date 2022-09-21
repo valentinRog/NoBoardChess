@@ -1,24 +1,21 @@
 <script>
   import { onMount } from "svelte";
+  import chevronRight from "../assets/chevron_right.svg";
+  import chevronLeft from "../assets/chevron_left.svg";
+  import firstPage from "../assets/first_page.svg";
+  import lastPage from "../assets/last_page.svg";
+
   import {
     Chessboard,
     COLOR,
   } from "cm-chessboard/src/cm-chessboard/Chessboard";
   import Sprites from "cm-chessboard/assets/images/chessboard-sprite-staunty.svg";
   import "cm-chessboard/assets/styles/cm-chessboard.css";
-  import Scrollbar from 'smooth-scrollbar';
-
-  import Move from "./Move.svelte";
-
-  import chevronRight from "../assets/chevron_right.svg";
-  import chevronLeft from "../assets/chevron_left.svg";
-  import firstPage from "../assets/first_page.svg";
-  import lastPage from "../assets/last_page.svg";
-
-  export let puzzle;
-  export let game;
 
   let board;
+  export let game;
+  export let puzzle;
+
   onMount(() => {
     board = new Chessboard(document.getElementById("chessboard"), {
       position: puzzle.fen,
@@ -30,93 +27,58 @@
         cssClass: "black-and-white",
       },
     });
-    Scrollbar.init(document.querySelector('.my-scrollbar'), {});
   });
-
-  let fenIndex = 0;
-  $: board && board.setPosition(puzzle.fens[fenIndex], true);
+  export let activeFenIndex = 0;
+  $: board && board.setPosition(puzzle.fens[activeFenIndex], true);
 
   const first = () => {
-    fenIndex = 0;
+    activeFenIndex = 0;
   };
   const prev = () => {
-    if (fenIndex) {
-      fenIndex--;
+    if (activeFenIndex) {
+      activeFenIndex--;
     }
   };
   const next = () => {
-    if (fenIndex < puzzle.san_moves.length) {
-      fenIndex++;
+    if (activeFenIndex < puzzle.san_moves.length) {
+      activeFenIndex++;
     }
   };
   const last = () => {
-    fenIndex = puzzle.san_moves.length;
+    activeFenIndex = puzzle.san_moves.length;
   };
 </script>
 
-<div id="answer">
-  <div id="board">
-    <div class="container">
-      <div id="chessboard" />
-    </div>
-    <div id="controls">
-      <button on:click={first}><img src={firstPage} alt="first" /></button>
-      <button on:click={prev}><img src={chevronLeft} alt="prev" /></button>
-      <button on:click={next}><img src={chevronRight} alt="next" /></button>
-      <button on:click={last}><img src={lastPage} alt="last" /></button>
-    </div>
+<div id="board">
+  <div id="container">
+    <div id="chessboard" />
   </div>
-  <div>
-  <div id="line" class="my-scrollbar">
-    {#each puzzle.san_moves as _, i}
-      <div>
-        <Move {puzzle} moveIndex={i} failed={i === game.failedMoveIndex} bind:activeFenIndex={fenIndex}/>
-      </div>
-    {/each}
+  <div id="controls">
+    <button on:click={first}><img src={firstPage} alt="first" /></button>
+    <button on:click={prev}><img src={chevronLeft} alt="prev" /></button>
+    <button on:click={next}><img src={chevronRight} alt="next" /></button>
+    <button on:click={last}><img src={lastPage} alt="last" /></button>
   </div>
-</div>
 </div>
 
 <style lang="scss">
   @import "../style/vars";
   @import "../style/mix";
 
-  #answer {
-    display: flex;
-  }
-
-  .container {
-    @include container;
-  }
-
   #board {
-    width: $board-size;
     margin: 0 auto;
-  }
-
-  #controls {
-    display: flex;
-    justify-content: center;
-  }
-
-  img {
-    width: 2rem;
-    filter: invert(100%) sepia(0%) saturate(7494%) hue-rotate(346deg)
-      brightness(100%) contrast(104%);
-    vertical-align: middle;
-  }
-
-  #line {
-    @include container;
-    @include line(column);
-  }
-
-  @media only screen and (max-width: 800px) {
-    #answer {
-      flex-direction: column;
+    #container {
+      width: $board-size;
+      @include container;
     }
-    #line {
-      @include line(row);
+    #controls {
+      display: flex;
+      justify-content: center;
+      img {
+        @include to-white;
+        width: 2rem;
+        vertical-align: middle;
+      }
     }
   }
 </style>
