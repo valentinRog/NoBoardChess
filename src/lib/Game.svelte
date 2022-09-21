@@ -3,6 +3,7 @@
   import Inputs from "./Inputs.svelte";
   import Answer from "./Answer.svelte";
   import Infos from "./Infos.svelte";
+  import Guessing from "./Guessing.svelte";
 
   let level = 1;
 
@@ -22,6 +23,7 @@
 
   let game = {
     failedMoveIndex: null,
+    currentMoveIndex: 1,
     guessing: true,
     level: level,
     lives: 3,
@@ -38,8 +40,7 @@
   {#await promise then puzzle}
     <Infos {puzzle} bind:game />
     {#if game.guessing}
-      <Pieces pieces={puzzle.pieces} />
-      <Inputs {puzzle} bind:game />
+      <Guessing {puzzle} bind:game />
     {:else}
       <Answer {puzzle} bind:game />
     {/if}

@@ -6,7 +6,8 @@
 
   export let game;
   export let puzzle;
-  export let activeFenIndex;
+  export let activeFenIndex = null;
+  export let lastMoveIndex = puzzle.san_moves.length;
   export let direction = "column";
 
   onMount(() => {
@@ -17,7 +18,7 @@
 </script>
 
 <div id="line" class:scrollbar={direction === "column"} class={direction}>
-  {#each puzzle.san_moves as _, i}
+  {#each puzzle.san_moves.slice(0, lastMoveIndex + 1) as _, i}
     <div>
       <Move
         {puzzle}

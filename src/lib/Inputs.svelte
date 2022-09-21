@@ -2,18 +2,17 @@
   export let puzzle;
   export let game;
 
-  import Move from "./Move.svelte";
-
   game.failedMoveIndex = null;
-  let index = 1;
-  $: move = puzzle.san_moves[index];
-  $: moves = puzzle.san_moves.slice(0, index);
+  $: move = puzzle.san_moves[game.currentMoveIndex];
   let current = "";
 
   const getKeys = () => {
     let keys = [];
-    if (index < puzzle.legal_san_moves.length && current !== move) {
-      puzzle.legal_san_moves[index].forEach((move) => {
+    if (
+      game.currentMoveIndex < puzzle.legal_san_moves.length &&
+      current !== move
+    ) {
+      puzzle.legal_san_moves[game.currentMoveIndex].forEach((move) => {
         if (move.startsWith(current) && !keys.includes(move[current.length])) {
           keys = [...keys, move[current.length]];
         }
@@ -33,15 +32,15 @@
           current += getKeys()[0];
         }
         if (current === move) {
-          index += 2;
+          game.currentMoveIndex += 2;
           current = "";
-          if (index > puzzle.san_moves.length - 1) {
+          if (game.currentMoveIndex > puzzle.san_moves.length - 1) {
             game.guessing = false;
           }
         }
         buttons = getKeys();
       } else {
-        game.failedMoveIndex = index;
+        game.failedMoveIndex = game.currentMoveIndex;
         game.fails++;
         game.guessing = false;
       }
@@ -50,13 +49,6 @@
 </script>
 
 <div>
-  <div id="line">
-    {#each moves as _, i}
-      <div>
-        <Move {puzzle} moveIndex={i} />
-      </div>
-    {/each}
-  </div>
   <div>
     {current}
   </div>
