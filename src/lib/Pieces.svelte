@@ -1,5 +1,5 @@
 <script>
-  export let pieces;
+  export let puzzle;
 
   import b from "../assets/bB.svg";
   import k from "../assets/bK.svg";
@@ -33,13 +33,13 @@
     {
       color: "white",
       pieces: Object.fromEntries(
-        Object.entries(pieces).filter(([k, _]) => k === k.toUpperCase())
+        Object.entries(puzzle.pieces).filter(([k, _]) => k === k.toUpperCase())
       ),
     },
     {
       color: "black",
       pieces: Object.fromEntries(
-        Object.entries(pieces).filter(([k, _]) => k === k.toLowerCase())
+        Object.entries(puzzle.pieces).filter(([k, _]) => k === k.toLowerCase())
       ),
     },
   ];

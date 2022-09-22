@@ -1,6 +1,4 @@
 <script>
-  import Pieces from "./Pieces.svelte";
-  import Inputs from "./Inputs.svelte";
   import Answer from "./Answer.svelte";
   import Infos from "./Infos.svelte";
   import Guessing from "./Guessing.svelte";
@@ -21,16 +19,10 @@
   };
   let promise = get_puzzle();
 
-  let game = {
-    failedMoveIndex: null,
-    currentMoveIndex: 1,
-    guessing: true,
-    level: level,
-    lives: 3,
-    fails: 0,
-  };
+  import Game from "../Game";
+  let game = new Game();
 
-  $: if (level < game.level) {
+  $: if (level != game.level) {
     level = game.level;
     promise = get_puzzle();
   }

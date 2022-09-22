@@ -9,7 +9,7 @@
   game.currentMoveIndex = 1;
 </script>
 
-<Pieces pieces={puzzle.pieces} />
+<Pieces {puzzle} />
 <Line
   {game}
   {puzzle}
