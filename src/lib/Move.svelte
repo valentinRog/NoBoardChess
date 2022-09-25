@@ -1,23 +1,23 @@
 <script>
-  export let puzzle;
+  import { puzzle, failedMoveIndex } from "../stores";
+
   export let moveIndex;
   export let activeFenIndex = null;
-  export let failed = false;
 
   let move = "";
-  const color = puzzle.fens[moveIndex].split(" ")[1];
+  const color = $puzzle.fens[moveIndex].split(" ")[1];
   const getPly = (fen) => {
     return Number(fen.split(" ").at(-1));
   };
-  const ply = 1 + getPly(puzzle.fens[moveIndex + 1]) - getPly(puzzle.fens[1]);
+  const ply = 1 + getPly($puzzle.fens[moveIndex + 1]) - getPly($puzzle.fens[1]);
   move += String(ply) + (color === "w" ? "." : "...");
-  move += puzzle.san_moves[moveIndex];
+  move += $puzzle.san_moves[moveIndex];
 </script>
 
 <div
   class={color}
   class:active={activeFenIndex === moveIndex + 1}
-  class:failed
+  class:failed={moveIndex === $failedMoveIndex}
   class:pointer={activeFenIndex !== null}
   on:click={() => {
     if (activeFenIndex !== null) {

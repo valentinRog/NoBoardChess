@@ -4,8 +4,6 @@
   import Line from "./Line.svelte";
   import Board from "./Board.svelte";
 
-  export let puzzle;
-  export let game;
   let activeFenIndex = 0;
   let innerWidth;
 
@@ -14,13 +12,16 @@
 
 <svelte:window bind:innerWidth />
 
-<div id="answer" style:flex-direction={innerWidth < maxWidth ? "column" : "row"}>
-  <Board bind:game bind:activeFenIndex {puzzle} />
+<div
+  id="answer"
+  style:flex-direction={innerWidth < maxWidth ? "column" : "row"}
+>
+  <Board bind:activeFenIndex />
   <div>
     {#if innerWidth < maxWidth}
-      <Line {game} {puzzle} bind:activeFenIndex direction="row" />
+      <Line bind:activeFenIndex direction="row" />
     {:else}
-      <Line {game} {puzzle} bind:activeFenIndex direction="column" />
+      <Line bind:activeFenIndex direction="column" />
     {/if}
   </div>
 </div>

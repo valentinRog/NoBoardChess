@@ -3,17 +3,11 @@
   import Inputs from "./Inputs.svelte";
   import Line from "./Line.svelte";
 
-  export let puzzle;
-  export let game;
+  export let guessing;
 
-  game.currentMoveIndex = 1;
+  let currentMoveIndex = 1;
 </script>
 
-<Pieces {puzzle} />
-<Line
-  {game}
-  {puzzle}
-  lastMoveIndex={game.currentMoveIndex - 1}
-  direction="row"
-/>
-<Inputs {puzzle} bind:game />
+<Pieces />
+<Line  lastMoveIndex={currentMoveIndex - 1} direction="row" />
+<Inputs bind:currentMoveIndex bind:guessing />

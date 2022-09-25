@@ -12,14 +12,15 @@
   import Sprites from "cm-chessboard/assets/images/chessboard-sprite-staunty.svg";
   import "cm-chessboard/assets/styles/cm-chessboard.css";
 
+  import { puzzle } from "../stores";
+
   let board;
-  export let game;
-  export let puzzle;
 
   onMount(() => {
     board = new Chessboard(document.getElementById("chessboard"), {
-      position: puzzle.fen,
-      orientation: puzzle.fen.split(" ")[1] === "b" ? COLOR.white : COLOR.black,
+      position: $puzzle.fen,
+      orientation:
+        $puzzle.fen.split(" ")[1] === "b" ? COLOR.white : COLOR.black,
       sprite: {
         url: Sprites,
       },
@@ -29,7 +30,7 @@
     });
   });
   export let activeFenIndex = 0;
-  $: board && board.setPosition(puzzle.fens[activeFenIndex], true);
+  $: board && board.setPosition($puzzle.fens[activeFenIndex], true);
 
   const first = () => {
     activeFenIndex = 0;
@@ -40,12 +41,12 @@
     }
   };
   const next = () => {
-    if (activeFenIndex < puzzle.san_moves.length) {
+    if (activeFenIndex < $puzzle.san_moves.length) {
       activeFenIndex++;
     }
   };
   const last = () => {
-    activeFenIndex = puzzle.san_moves.length;
+    activeFenIndex = $puzzle.san_moves.length;
   };
 </script>
 

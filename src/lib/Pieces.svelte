@@ -1,5 +1,5 @@
 <script>
-  export let puzzle;
+  import { puzzle } from "../stores";
 
   import b from "../assets/bB.svg";
   import k from "../assets/bK.svg";
@@ -33,13 +33,13 @@
     {
       color: "white",
       pieces: Object.fromEntries(
-        Object.entries(puzzle.pieces).filter(([k, _]) => k === k.toUpperCase())
+        Object.entries($puzzle.pieces).filter(([k, _]) => k === k.toUpperCase())
       ),
     },
     {
       color: "black",
       pieces: Object.fromEntries(
-        Object.entries(puzzle.pieces).filter(([k, _]) => k === k.toLowerCase())
+        Object.entries($puzzle.pieces).filter(([k, _]) => k === k.toLowerCase())
       ),
     },
   ];
@@ -49,13 +49,13 @@
   {#each color_pieces as color}
     <div class="{color.color} container">
       {#each Object.keys(color.pieces) as piece_type}
-      <div class={piece_type}>
-        <img src={img_srcs[piece_type]} alt="{piece_type}" />
-        <ul>
+        <div class={piece_type}>
+          <img src={img_srcs[piece_type]} alt={piece_type} />
+          <ul>
             {#each color.pieces[piece_type] as square}
-                <li>{square}</li>
+              <li>{square}</li>
             {/each}
-        </ul>
+          </ul>
         </div>
       {/each}
     </div>
@@ -85,7 +85,7 @@
     text-align: center;
     font-size: 1.2rem;
     font-weight: bold;
-}
+  }
 
   #pieces {
     display: flex;

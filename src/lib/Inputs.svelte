@@ -1,18 +1,19 @@
 <script>
-  export let puzzle;
-  export let game;
+  import { puzzle, fails, failedMoveIndex } from "../stores";
 
-  game.failedMoveIndex = null;
-  $: move = puzzle.san_moves[game.currentMoveIndex];
+  export let currentMoveIndex;
+  export let guessing;
+
+  $: move = $puzzle.san_moves[currentMoveIndex];
   let current = "";
 
   const getKeys = () => {
     let keys = [];
     if (
-      game.currentMoveIndex < puzzle.legal_san_moves.length &&
+      currentMoveIndex < $puzzle.legal_san_moves.length &&
       current !== move
     ) {
-      puzzle.legal_san_moves[game.currentMoveIndex].forEach((move) => {
+      $puzzle.legal_san_moves[currentMoveIndex].forEach((move) => {
         if (move.startsWith(current) && !keys.includes(move[current.length])) {
           keys = [...keys, move[current.length]];
         }
@@ -32,17 +33,17 @@
           current += getKeys()[0];
         }
         if (current === move) {
-          game.currentMoveIndex += 2;
+          currentMoveIndex += 2;
           current = "";
-          if (game.currentMoveIndex > puzzle.san_moves.length - 1) {
-            game.guessing = false;
+          if (currentMoveIndex > $puzzle.san_moves.length - 1) {
+            guessing = false;
           }
         }
         buttons = getKeys();
       } else {
-        game.failedMoveIndex = game.currentMoveIndex;
-        game.fails++;
-        game.guessing = false;
+        $fails++;
+        $failedMoveIndex = currentMoveIndex;
+        guessing = false;
       }
     };
   };
@@ -56,13 +57,3 @@
     <button on:click={handleClick(button)}>{button}</button>
   {/each}
 </div>
-
-<style lang="scss">
-  @import "../style/vars";
-  @import "../style/mix";
-
-  #line {
-    @include container;
-    @include line(row);
-  }
-</style>
