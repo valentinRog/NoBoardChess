@@ -1,23 +1,10 @@
 <script>
-  import { puzzle, lives, fails, level, failedMoveIndex } from "../stores";
+  import { puzzle, lives, fails, level, failedMoveIndex, next } from "../stores";
 
   import heart from "../assets/heart.svg";
   import brokenHeart from "../assets/broken_heart.svg";
 
   export let guessing;
-
-  const next = () => {
-    if ($fails < $lives) {
-      guessing = true;
-      $level++;
-      $failedMoveIndex = null;
-    } else {
-      guessing = true;
-      $level = 1;
-      $fails = 0;
-      $failedMoveIndex = null;
-    }
-  };
 </script>
 
 <div id="infos">
@@ -33,7 +20,10 @@
     {/each}
   </div>
   {#if !guessing}
-    <button on:click={next}>
+    <button on:click={()=>{
+      guessing = true;
+      $next();
+    }}>
       {$fails < $lives ? "next" : "restart"}
     </button>
   {/if}
