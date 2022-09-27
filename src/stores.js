@@ -10,13 +10,12 @@ export const next = derived(
   [level, lives, fails],
   ([$level, $lives, $fails]) => {
     return () => {
+      failedMoveIndex.set(null);
       if ($fails < $lives) {
         level.set($level + 1);
-        failedMoveIndex.set(null);
       } else {
         level.set(1);
         fails.set(0);
-        failedMoveIndex.set(null);
       }
     };
   }

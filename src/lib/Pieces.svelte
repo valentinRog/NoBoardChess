@@ -66,8 +66,15 @@
   @import "../style/vars";
   @import "../style/mix";
 
-  .container {
-    @include container;
+  #pieces {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    > div {
+      display: flex;
+      justify-content: center;
+      @include container;
+    }
   }
 
   img {
@@ -78,23 +85,11 @@
 
   ul {
     padding: 0;
-  }
-
-  li {
-    list-style-type: none;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-
-  #pieces {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  #pieces > div {
-    display: flex;
-    justify-content: center;
+    li {
+      list-style-type: none;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
   }
 </style>

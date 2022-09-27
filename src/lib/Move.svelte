@@ -36,21 +36,18 @@
     border-radius: $radius;
     border: 2px solid transparent;
     vertical-align: center;
-  }
 
-  .active {
-    border-color: white;
-  }
-
-  .w {
-    background-color: $light-white;
-  }
-
-  .b {
-    background-color: $light-black;
-  }
-
-  .failed {
-    color: $red;
+    &.w {
+      background-color: $light-white;
+    }
+    &.b {
+      background-color: $light-black;
+    }
+    &.active {
+      border-color: white;
+    }
+    &.failed {
+      color: $red;
+    }
   }
 </style>
