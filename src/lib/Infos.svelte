@@ -5,6 +5,19 @@
   import brokenHeart from "../assets/broken_heart.svg";
 
   export let guessing;
+
+  const next = () => {
+    if ($fails < $lives) {
+      guessing = true;
+      $level++;
+      $failedMoveIndex = null;
+    } else {
+      guessing = true;
+      $level = 1;
+      $fails = 0;
+      $failedMoveIndex = null;
+    }
+  };
 </script>
 
 <div id="infos">
@@ -20,24 +33,9 @@
     {/each}
   </div>
   {#if !guessing}
-    {#if $fails < $lives}
-      <button
-        on:click={() => {
-          guessing = true;
-          $level++;
-          $failedMoveIndex = null;
-        }}>next</button
-      >
-    {:else}
-      <button
-        on:click={() => {
-          guessing = true;
-          $level = 1;
-          $fails = 0;
-          $failedMoveIndex = null;
-        }}>restart</button
-      >
-    {/if}
+    <button on:click={next}>
+      {$fails < $lives ? "next" : "restart"}
+    </button>
   {/if}
   <div>
     <ul>
