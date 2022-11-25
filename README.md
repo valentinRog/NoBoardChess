@@ -1,1 +1,1 @@
-https://valentinrog.github.io/noboardchess/
+http://www.noboardchess.org/
