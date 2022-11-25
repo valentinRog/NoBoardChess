@@ -1,1 +1,1 @@
-http://www.noboardchess.org/
+http://noboardchess.org/
